@@ -16,13 +16,13 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
         <!-- title and favicon (TODO add favicon and theme)-->
-        <title>Word Guess Game - ADD THEME</title>
+        <title>Word Guess Game - British Royal Wedding</title>
 
     </head>
     <body>
 
         <!-- Navbar -->
-        <header class="">
+        <!--header class="">
             <nav class="navbar navbar-expand-lg navbar-light bg-light main-header">
                 <a class="navbar-brand logo" href="#">Fun with Words</a>
                 
@@ -30,45 +30,82 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse jc-navbar" id="navbarNav">
+                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
                             <a class="nav-link" href="index.html">About<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>            <!-- TODO if desired -->
+                            <a class="nav-link" href="#">Contact</a>            
                         </li>
                     </ul>
                 </div>
             </nav>
-        </header>
+        </header-->
 
         <!-- Main Game Content -->
-        <h1 class="display-1 text-center">Word Guess Game</h1>
-        <p class="lead text-center">Press any key to get started!</p>
+        <div class="container-fluid">
+            <h1 class="display-1 text-center">Word Guess Game</h1>
+            <p class="lead text-center">Press any key to get started!</p>
+            <br>
 
-        <div id="word-to-guess">
-            <p>
-                <span id="word-char-1" class="mark"><u>T</u></span>&nbsp;
-                <span id="word-char-2" class="mark"><u>E</u></span>&nbsp;
-                <span id="word-char-3" class="mark"><u>S</u></span>&nbsp;
-                <span id="word-char-4" class="mark"><u>T</u></span>&nbsp;
-            </p>
-        </div>
+            <div class="row debug">
+                <div class="col-md-12">
+                    <div id="word-to-guess" class="display-4 text-center">
+                        <p>
+                            <span class="mark">
+                                <span id="word-char-1"><u>T</u></span>&nbsp;
+                                <span id="word-char-2"><u>E</u></span>&nbsp;
+                                <span id="word-char-3"><u>S</u></span>&nbsp;
+                                <span id="word-char-4"><u>T</u></span>&nbsp;
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-        <div id="guesses">
-            <p>Guesses Remaining:&nbsp;<span id="guesses-remaining"></span></p>
-            <p>Letters Already Guessed:&nbsp;<span id="guessed-letters">NONE</span></p>
-        </div>
+            <div class="row debug">
+                <div class="col-md-1">
+                </div>
 
-        <div id="scores">
-            <p>Wins:&nbsp;<span id="total-wins">0</span></p>
-            <p>Losses:&nbsp;<span id="total-losses">0</span></p>
-            <p>Games Played:&nbsp;<span id="total-games-played">0</span></p>
+                <div class="col-md-3">
+                    <div id="guesses">
+                        <p>Guesses Remaining:&nbsp;<span id="guesses-remaining"></span></p>
+                        <p>Letters Already Guessed:&nbsp;<span id="guessed-letters">NONE</span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                </div>
+            </div>
+
+            <div class="row debug">
+                <div class="col-md-12">&nbsp;
+                </div>
+            </div>
+
+            <div class="row debug">
+                <div class="col-md-1">
+                </div>
+
+                <div class="col-md-2">
+                    <div id="scores">
+                        <p>Wins:&nbsp;<span id="total-wins">0</span></p>
+                        <p>Losses:&nbsp;<span id="total-losses">0</span></p>
+                        <p>Games Played:&nbsp;<span id="total-games-played">0</span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                </div>
+
+                <div class="col-md-8">
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer class="footer container-fluid text-center">
+        <footer class="footer container-fluid text-center bg-light">
             <nav class="navbar-fixed-bottom">
                 <span class="text-muted">Copyright &copy;</span>
             </nav>
