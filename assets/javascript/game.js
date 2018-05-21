@@ -1,3 +1,16 @@
+
+//*******************/
+//***  VARIABLES  ***/
+//*******************/
+//array of guessed letters
+var guessedLetters = [];
+
+var guessesRemaining = 0;
+
+var totalWins = 0;
+var totalLosses = 0;
+var totalGamesPlayed = 0;
+
 //word bank
 var wordBank = ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
     "Carriage","black-tie","Frogmore House","Jaguar","Queen","Celebreties","Sir Elton John","Ascot Landau","Commonwealth","E190518","Blues and Royals",
@@ -9,13 +22,20 @@ var wordBank = ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry
 
 // randomly chooses a word from the word bank
 var wordToGuess = wordBank[Math.floor(Math.random() * wordBank.length)];
-console.log("Word to guess: " + wordToGuess);
 wordToGuess = wordToGuess.toUpperCase(wordToGuess);
 
             //document.querySelector("#word-to-guess").innerHTML = wordToGuess;
 
+//*******************/
+//***  FUNCTIONS  ***/
+//*******************/
+
+
+//***   LOGIC ***//
+
 // for each letter add
 for (i=0; i < wordToGuess.length; i++) {
+    //console.log("String " + wordToGuess[i].toString() + " is alphanum " + isAlphaNumeric(wordToGuess[i]));
 
     // 1) <span id="word-char-X"><u>T</u></span>
     var htmlSpan = document.createElement("span");                
@@ -23,7 +43,7 @@ for (i=0; i < wordToGuess.length; i++) {
     var htmlText = document.createTextNode(wordToGuess[i]);
 
     // if the character is a word separator, do not underline it
-    if (wordToGuess[i] === " ") {
+    if (wordToGuess[i] === " " || !/[\w]/.test(wordToGuess[i])) {        //  !isAlphaNumeric(wordToGuess[i])) {
         htmlSpan.appendChild(htmlText);  
     } else {                                                    
         var htmlUnderline = document.createElement("u");
@@ -44,32 +64,23 @@ for (i=0; i < wordToGuess.length; i++) {
     console.log("html: " + document.getElementById("word-to-guess").innerHTML);
 }
 
-
-//array of guessed letters
-var guessedLetters = [];
-
-var guessesRemaining = 0;
-
-var totalWins = 0;
-var totalLosses = 0;
-var totalGamesPlayed = 0;
-
-
-//functions:
-// -> showGameStats
-// -> logGameStats
-// -> revealLetter
-
-// objects:
-// -> var game = {... }
-
+//*******************/
+//***  EVENTS     ***/
+//*******************/
 document.onkeyup = function(event) {
     var key = event.key;
 
     console.log("Key pressed is: " + key);
+    //console.log("isalphanum: " + isAlphaNumeric(key));
+    console.log(key);
 
-    guessedLetters.push(key);
-    document.querySelector("#guessed-letters").innerHTML = guessedLetters;
+    if (/[a-zA-Z0-9]/.test(key) && key.length === 1) {
+        // if the guessed letter has not been entered before, add it to the guesses.  Otherwise, ignore.
+        if (guessedLetters.indexOf(key) === -1) {
+            guessedLetters.push(key);
+            document.querySelector("#guessed-letters").innerHTML = guessedLetters;
+        }
+    }
 
     //if key pushed is in the word, then show that letter in the word to guess
         //func: call method to show letter
@@ -78,5 +89,16 @@ document.onkeyup = function(event) {
 
         //otherwise, do nothing
 
-
   }
+
+//********************/
+//*** PSEUDO NOTES ***/
+//********************/
+
+//functions:
+// -> showGameStats
+// -> logGameStats
+// -> revealLetter
+
+// objects:
+// -> var game = {... }
