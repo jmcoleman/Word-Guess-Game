@@ -5,7 +5,7 @@
 //array of guessed letters
 var guessedLetters = [];
 
-var guessesRemaining = 0;
+var guessesRemaining = 5;
 
 var totalWins = 0;
 var totalLosses = 0;
@@ -37,9 +37,20 @@ wordToGuess = wordToGuess.toUpperCase(wordToGuess);
 for (i=0; i < wordToGuess.length; i++) {
     //console.log("String " + wordToGuess[i].toString() + " is alphanum " + isAlphaNumeric(wordToGuess[i]));
 
+    // create space at beginning
+    if (i===0) {
+        var htmlLeadSpan = document.createElement("span");  
+        var htmlLeadTextNbsp = document.createTextNode(String.fromCharCode(160));
+    
+        htmlLeadSpan.setAttribute("class", "blank-separator");
+        htmlLeadSpan.appendChild(htmlLeadTextNbsp);  
+    
+        document.getElementById("word-to-guess").appendChild(htmlLeadSpan); 
+    }
+
     // 1) <span id="word-char-X"><u>T</u></span>
     var htmlSpan = document.createElement("span");                
-    htmlSpan.setAttribute("id", "word-char-" + i);
+    htmlSpan.setAttribute("id", "span-char-" + i);
     var htmlText = document.createTextNode(wordToGuess[i]);
 
     // if the character is a word separator, do not underline it
@@ -47,11 +58,12 @@ for (i=0; i < wordToGuess.length; i++) {
         htmlSpan.appendChild(htmlText);  
     } else {                                                    
         var htmlUnderline = document.createElement("u");
+        htmlUnderline.setAttribute("id", "underline-char-" + i);
         htmlSpan.appendChild(htmlUnderline);  
         htmlUnderline.appendChild(htmlText);  
     }
 
-    // 2) <span>&nbsp</span> tp create space around letters instead of using padding
+    // 2) create space around letters (instead of using padding so can style differently if desired)
     var htmlSpan2 = document.createElement("span");  
     var htmlTextNbsp = document.createTextNode(String.fromCharCode(160));
 
@@ -71,23 +83,50 @@ document.onkeyup = function(event) {
     var key = event.key;
 
     console.log("Key pressed is: " + key);
-    //console.log("isalphanum: " + isAlphaNumeric(key));
     console.log(key);
 
+    key = key.toUpperCase();
+
+    // only evaluate characters we care about
     if (/[a-zA-Z0-9]/.test(key) && key.length === 1) {
-        // if the guessed letter has not been entered before, add it to the guesses.  Otherwise, ignore.
-        if (guessedLetters.indexOf(key) === -1) {
-            guessedLetters.push(key);
-            document.querySelector("#guessed-letters").innerHTML = guessedLetters;
+
+        // if letter is in the word to guess
+        if (wordToGuess.indexOf(key) !== -1) {
+
+            // show the letters that match
+            console.log("found it");
+
+        } else {
+            // letter is not in the word so decrement the guesses remaining, unless that was the last guess
+            if (guessesRemaining > 0 ) {
+
+                guessesRemaining--;
+
+                // if the guessed letter has not been entered before, add it to the guesses.  Otherwise, ignore.
+                if (guessedLetters.indexOf(key) === -1) {
+                    guessedLetters.push(key);
+                    document.querySelector("#guessed-letters").innerHTML = guessedLetters;
+                }
+
+                document.querySelector("#guesses-remaining").innerHTML = guessesRemaining;
+
+            } else {            // there were no guesses remaining
+
+                // END GAME
+                totalLosses++;
+                totalGamesPlayed++;
+
+                document.querySelector("#total-losses").innerHTML = totalLosses;
+                document.querySelector("#total-games-played").innerHTML = totalGamesPlayed;
+
+                console.log(totalLosses);
+                console.log(totalGamesPlayed);
+
+                //gameReset();              TODO
+            }
+
         }
     }
-
-    //if key pushed is in the word, then show that letter in the word to guess
-        //func: call method to show letter
-    //else add the letter to the previous guesses letters 
-        //if it hasn't already been added, add it
-
-        //otherwise, do nothing
 
   }
 
