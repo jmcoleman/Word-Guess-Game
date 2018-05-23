@@ -33,6 +33,7 @@ function Game(maxGuesses, wordBank) {
         var node = document.getElementById("word-to-guess");
         node.innerHTML = '';
 
+        console.log(this.wordToGuess);
         this.showStartWord(this.wordToGuess);
         //this.showSolvedWord(this.wordToGuess);
     };
@@ -53,19 +54,43 @@ function Game(maxGuesses, wordBank) {
     this.showStartWord = function(word) {
         // add leading space at front of word and trailing space after each letter
         for (let j = 0; j < word.length; j++) {
-            if (j===0) { this.drawLetter(String.fromCharCode(160), -1, true); };
+            if (j===0) { this.drawLetter(" ", -1, true); };
             this.drawLetter(word[j], j, false);
-            this.drawLetter(String.fromCharCode(160), -1, true);
+            this.drawLetter(" ", -1, true);
         }
     };
 
     this.drawLetter = function (char, position, isShown) {
-        //<span id="0" style="text-decoration: underline;">_&nbsp;</span><span>&nbsp;</span>
+        //Unshown Letter -->  <span id="0" style="text-decoration: underline;">_&nbsp;</span>   <span class="whitespace">&nbsp;</span>
+        //Shown Letter -->  <span id="0" style="text-decoration: none;">X</span>                <span class="whitespace">&nbsp;</span>
+        //Word Separator --> <span class="word-separator" style="text-decoration: none;">&nbsp;</span>
+        //Whitespace --> <span class="whitespace" style="text-decoration: none;"></span>
+
+        var isWordSeparator = (position >= 0 && char === " ");
+        var isCharAndShown = (isShown === true && !isWordSeparator);
+        var isCharAndHidden = (isShown === false && !isWordSeparator);
+        var isWhitespace = (position < 0);
+
         var spanElement = document.createElement("span");  
-        var textElement = isShown ? document.createTextNode(char) : document.createTextNode("_" + String.fromCharCode(160));
-    
-        if (char === String.fromCharCode(160)) {
-            spanElement.setAttribute("class", "blank-separator");
+        var textElement;
+        
+        if (isWordSeparator) {
+            textElement = document.createTextNode(String.fromCharCode(160));
+        } else if (isCharAndShown) {
+            textElement = document.createTextNode(char);
+        } else if (isCharAndHidden) {
+            textElement = document.createTextNode("_" + String.fromCharCode(160));
+        } else if (isWhitespace) {
+            textElement = document.createTextNode('');
+        };
+
+        if (char === " ") {
+            if (position >= 0) {
+                spanElement.setAttribute("class", "word-separator");
+            } else {
+                spanElement.setAttribute("class", "whitespace");
+            }
+            spanElement.setAttribute("style", "text-decoration: none;");
         } else {
             spanElement.setAttribute("id", position );
             spanElement.setAttribute("class", char);
@@ -156,14 +181,14 @@ document.onkeyup = function(event) {
         totalGamesPlayed++;
         window.document.querySelector("#total-games-played").innerHTML = totalGamesPlayed;
 
-        if (gameLoss)
-        {
+        // if (gameLoss)
+        // {
             totalLosses++;
             window.document.querySelector("#total-losses").innerHTML = totalLosses;
-        } else {                // game won        
-            totalWins++;
-            window.document.querySelector("#total-wins").innerHTML = totalWins;
-        }
+        // } else {                // game won        
+        //     totalWins++;
+        //     window.document.querySelector("#total-wins").innerHTML = totalWins;
+        // }
     }
 
     //gameReset();              TODO: Clean up object and reset game
