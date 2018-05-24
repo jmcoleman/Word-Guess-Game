@@ -5,6 +5,10 @@
 */
 
 body {
+    color: #fff;
+}
+
+.background-container {
     /*====================================
         Background image options
     ======================================*/
@@ -23,17 +27,15 @@ body {
     /* Option 2 */ 
     /* background: url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b008923562fa7b754bbe076/1526761769173/weddingblog120.jpg?format=1500w");   Source: Associated Press */
 
-
     background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b0089228a922d8cabed2986/1526761765237/weddingblog115.jpg?format=1500w");
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b0089228a922d8cabed2986/1526761765237/weddingblog115.jpg?format=1500w");
 
-    background-size: cover;
     background-attachment: fixed;
-    background-position: right; 
+    background-position: 50% 50%; 
     background-repeat: no-repeat;
+    background-size: cover;
+    
     background-color: rgb(78, 78, 78);
-
-    color: #fff;
 }
 
 /*
@@ -42,3 +44,9 @@ body {
 .mark {
     background-color: rgba(150,137,65,.6);
 }
+
+#word-to-guess {
+    padding: 0;
+    line-height: 1.5;
+}
+

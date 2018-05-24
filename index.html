@@ -19,7 +19,7 @@
         <title>Word Guess Game - British Royal Wedding</title>
 
     </head>
-    <body>
+    <body class="background-container">
 
         <!-- Navbar -->
         <!--header class="">
@@ -29,7 +29,6 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
@@ -45,8 +44,10 @@
 
         <!-- Main Game Content -->
         <div class="container-fluid">
-            <h1 class="display-1 text-center">Word Guess Game</h1>
-            <p class="lead text-center">Press any key to get started!</p>
+            <br>
+            <h1 class="display-2 text-center">Word Guess Game</h1>
+            <br>
+            <!--p class="lead text-center">Press any key to get started!</p-->
             <br>
 
             <div class="row debug">
@@ -79,14 +80,34 @@
                                     <span class="whitespace" style="text-decoration: none;"></span>
                                     <span id="11" class="Y" style="text-decoration: underline;">_&nbsp;</span>
                                     <span class="whitespace" style="text-decoration: none;"></span-->
-                                <!--span id="word-char-100" style="text-decoration: none;">T</span><span>&nbsp;</span>
+                                <!--span id="word-char-100" style="text-decoration: none;">T</span><span>&nbsp;</span-->
                                 <span id="word-char-200" style="text-decoration: underline;">_&nbsp;</span><span>&nbsp;</span>
                                 <span id="word-char-300" style="text-decoration: underline;">_&nbsp;</span><span>&nbsp;</span>
-                                <span id="word-char-400" style="text-decoration: none;">T</span><span>&nbsp;</span-->
+                                <!--span id="word-char-400" style="text-decoration: none;">T</span><span>&nbsp;</span-->
                             </span>
                         </p>
                     </div>
                 </div>
+            </div>
+
+            <div class="row debug">
+                <div class="col-md-12">
+                    <h6 class="display-4 text-center"><span id="selected-category">Royal Wedding 2018</span></h6>
+                    <br><br>
+                    <p class="lead text-center">Press any key to get started!</p>
+                </div>
+
+                <!--div class="col-md-1">
+                </div>
+
+                <div class="col-md-6">
+                    <div id="category">
+                        <p>Category:&nbsp;<span id="selected-category">Royal Wedding 2018</span></p>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                </div-->
             </div>
 
             <div class="row debug">
@@ -130,9 +151,9 @@
         </div>
 
         <!-- Footer -->
-        <footer class="footer container-fluid text-center bg-light">
+        <footer class="footer container-fluid text-right">
             <nav class="navbar-fixed-bottom">
-                <span class="text-muted">Copyright &copy;</span>
+                <span class="text-muted"><small>Copyright &copy;</small></span>
             </nav>
         </footer>
 
