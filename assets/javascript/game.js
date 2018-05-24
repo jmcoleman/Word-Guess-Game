@@ -169,6 +169,21 @@ function Game(maxGuesses, wordBank) {
 //*******************/
 window.onload = function() {
     myGame.start();                                 // start the game
+
+    //pseudo
+    //while loop to play games
+        // initialize gamen as empty
+        // game start -- listen to key events
+        // while not end of game
+            //game guess letter
+            //update guessed letters and remaining guesses
+        // end of game (solved or no guesses remain)
+        // update game win, loss
+        // if win, give message
+        // else if lose, play sound
+        // cleanup object
+    // next game
+
 };
 
 document.onkeyup = function(event) {
@@ -211,54 +226,3 @@ function getRenderedFont(elemID) {
     console.log(getStylePropertyValue(elemID, "font-family")); //'Times New Roman'
 };
 
-///////////////////////////////////////////
-    //  Moved to Game object
-    //*********************/
-    //***  FUNCTIONS    ***/
-    //*********************/
-    // function showStartWord(word) {
-    //     // add leading space at front of word and trailing space after each letter
-    //     for (let j = 0; j < word.length; j++) {
-    //         if (j===0) { drawLetter(String.fromCharCode(160), -1, true); };
-    //         drawLetter(word[j], j, false);
-    //         drawLetter(String.fromCharCode(160), -1, true);
-    //     }
-    // };
-
-    // function showSolvedWord (word) {
-    //     // clear portion solved and redraw it.
-    //     var node = document.getElementById("word-to-guess");
-    //     node.innerHTML = '';
-
-    //     // add leading space at front of word and trailing space after each letter
-    //     for (let j = 0; j < word.length; j++) {
-    //         if (j===0) { drawLetter(String.fromCharCode(160), -1, true); };
-    //         drawLetter(word[j], j, true);
-    //         drawLetter(String.fromCharCode(160), -1, true);
-    //     }
-    // };
-
-    // function drawLetter(char, position, isShown) {
-    //     //<span id="word-game-char-1" style="text-decoration: underline;">_&nbsp;</span><span>&nbsp;</span>
-    //     var spanElement = document.createElement("span");  
-    //     var textElement = isShown ? document.createTextNode(char) : document.createTextNode("_" + String.fromCharCode(160));
-
-    //     if (char === String.fromCharCode(160)) {
-    //         spanElement.setAttribute("class", "blank-separator");
-    //     } else {
-    //         spanElement.setAttribute("id", "word-game-char-" + position);
-    //         spanElement.setAttribute("class", "valid-char");
-
-    //         if (isShown) {
-    //             spanElement.setAttribute("style", "text-decoration: none;");
-    //         } else {
-    //             spanElement.setAttribute("style", "text-decoration: underline;");
-    //         }
-    //     }
-
-    //     spanElement.appendChild(textElement);  
-    //     document.getElementById("word-to-guess").appendChild(spanElement); 
-
-    //     console.log("html: " + document.getElementById("word-to-guess").innerHTML);
-    // };
-///////////////////////////////////////////
