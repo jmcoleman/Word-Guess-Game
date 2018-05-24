@@ -34,6 +34,8 @@ function Game(maxGuesses, wordBank) {
         node.innerHTML = '';
 
         console.log(this.wordToGuess);
+        getRenderedFont("word-to-guess");
+
         this.showStartWord(this.wordToGuess);
         //this.showSolvedWord(this.wordToGuess);
     };
@@ -98,7 +100,10 @@ function Game(maxGuesses, wordBank) {
             if (isShown) {
                 spanElement.setAttribute("style", "text-decoration: none;");
             } else {
-                spanElement.setAttribute("style", "text-decoration: underline;");
+                //if (getStylePropertyValue("word-to-guess", "font-family") == "\"Segoe UI\", sans-serif") {
+                if (getStylePropertyValue("word-to-guess", "font-family").includes("\"Segoe UI\""))  {
+                    spanElement.setAttribute("style", "text-decoration: underline;");
+                }
             }
         }
     
@@ -194,6 +199,17 @@ document.onkeyup = function(event) {
     //gameReset();              TODO: Clean up object and reset game
 };
 
+//*********************/
+//***  FUNCTIONS    ***/
+//*********************/
+function getStylePropertyValue(elemId, prop) {
+    var elem = document.getElementById(elemId);
+    return window.getComputedStyle(elem).getPropertyValue(prop);
+};
+
+function getRenderedFont(elemID) {
+    console.log(getStylePropertyValue(elemID, "font-family")); //'Times New Roman'
+};
 
 ///////////////////////////////////////////
     //  Moved to Game object
