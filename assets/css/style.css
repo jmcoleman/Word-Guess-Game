@@ -38,6 +38,11 @@ body {
     background-color: rgb(78, 78, 78);
 }
 
+.regal-font {
+/*    font-family: 'Lobster Two', cursive; */
+    font-family: 'PT Sans', sans-serif;
+}
+
 /*
 #word-to-guess span 
 */
