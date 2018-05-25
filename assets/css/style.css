@@ -78,6 +78,10 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+#press-any-key {
+    line-height: 3em;
+}
+
 .top-row-buffer-lg { margin-top:50px; }
 .top-row-buffer-md { margin-top:30px; }
 .top-row-buffer-sm { margin-top:20px; }

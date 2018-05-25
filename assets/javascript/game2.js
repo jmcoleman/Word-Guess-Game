@@ -198,14 +198,15 @@ window.onload = function() {
         node.innerHTML = '';
 
         var word = myGame.start(RoyalWeddingCategories);
-
         showStartWord(word);
+        document.onkeyup = playGame;
         //showSolvedWord(word);
 }
 
-document.onkeyup = function(event) {
+function playGame (event) {
     var key = event.key;
     key = key.toUpperCase();
+
 
     console.log("Key pressed is: " + key);
     console.log(key);
@@ -249,11 +250,20 @@ document.onkeyup = function(event) {
     if (myGame.gameOver())
     {
         var newWord;
+        var feedbk = window.document.querySelector("#press-any-key");
+
+        document.onkeyup = null;
 
         if (myGame.isGameSolved()) {
+            feedbk.innerHTML = "You Win!";
+            //feedbk.setAttribute("style","font-size: 3rem");
+
             totalWins++;
             window.document.querySelector("#total-wins").innerHTML = totalWins;
         } else {
+            feedbk.innerHTML = "Awwww... Try Again!";
+            //feedbk.setAttribute("style","font-size: 3rem");
+            
             totalLosses++;
             window.document.querySelector("#total-losses").innerHTML = totalLosses;
         }
@@ -261,30 +271,29 @@ document.onkeyup = function(event) {
         totalGamesPlayed++;
         window.document.querySelector("#total-games-played").innerHTML = totalGamesPlayed;
 
-        /////////////////////
-        // Reset Game
-        var node = document.getElementById("word-to-guess");
-        node.innerHTML = '';
-        myGame.length = 0;
+        // show results for 3 seconds and then reset game
+        setTimeout(function() {
+            // Change the text here
+            feedbk.innerHTML = "Press any key to get started!";
 
-        newWord = myGame.start(RoyalWeddingCategories);
-        showStartWord(newWord);
+            /////////////////////
+            // Reset Game
+            var node = document.getElementById("word-to-guess");
+            node.innerHTML = '';
+            myGame.length = 0;
 
-        window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
-        window.document.querySelector("#guesses-remaining").innerHTML = myGame.guessesRemaining;
+            //feedbk.setAttribute("style","font-size: 1.25rem");
+
+            newWord = myGame.start(RoyalWeddingCategories);
+            //feedbk.innerHTML = "Press any key to get started!";
+            showStartWord(newWord);
+            document.onkeyup = playGame;
+
+            window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
+            window.document.querySelector("#guesses-remaining").innerHTML = myGame.guessesRemaining;
+
+        }, 5000);
     }
 
 };
 
-    //while loop to play games
-        // initialize game as empty
-        // game start -- listen to key events
-        // while not end of game
-            //game guess letter
-            //update guessed letters and remaining guesses
-        // end of game (solved or no guesses remain)
-        // update game win, loss
-        // if win, give message
-        // else if lose, play sound
-        // cleanup object
-    // next game
