@@ -10,13 +10,15 @@ var totalGamesPlayed = 0;
 //*******************/
 //***  OBJECTS    ***/
 //*******************/
-var RoyalWeddingCategories = ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
-            "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
-            "frockcoat","Veil","page boys","tiara","Duke of Cambridge","best man","Archbishop of Canterbury","St. George's Chapel","Duchess of Cambridge",
-            "Prince George","Princess Charlotte","St. George's Hall","Bishop Michael Curry","Doria Ragland","Prince of Wales","Nottingham Cottage","American",
-            "Suits","Princess of Wales","fireworks","cocktail ring","Princess Diana","The Royal Navy","British Army","Royal Air Force","parade","Captain Wales","fashion","modern","diversity","Prince William","Kensington Palace","Nott Cott","Prince Charles",
-            "George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"];
+// var RoyalWeddingCategories = ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
+//             "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
+//             "frockcoat","Veil","page boys","tiara","Duke of Cambridge","best man","Archbishop of Canterbury","St. George's Chapel","Duchess of Cambridge",
+//             "Prince George","Princess Charlotte","St. George's Hall","Bishop Michael Curry","Doria Ragland","Prince of Wales","Nottingham Cottage","American",
+//             "Suits","Princess of Wales","fireworks","cocktail ring","Princess Diana","The Royal Navy","British Army","Royal Air Force","parade","Captain Wales","fashion","modern",
+//             "diversity","Prince William","Kensington Palace","Nott Cott","Prince Charles",
+//             "George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"];
 
+//this is an object of properties with properties assigned to arrays.
 // var RoyalWeddingCategories = {
 //     "All": ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
 //             "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
@@ -30,10 +32,28 @@ var RoyalWeddingCategories = ["United Kingdom","Windsor Castle","Duke of Sussex"
 //     "Royalty": ["Prince Harry","Queen Elizabeth II","Prince George","Princess Charlotte","Princess Diana","Prince William","Prince Charles"]
 // };
 
+// want an array of objects
+var RoyalWeddingCategories = [
+    { "name": "All",
+      "wordlist": ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
+            "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
+            "frockcoat","Veil","page boys","tiara","Duke of Cambridge","best man","Archbishop of Canterbury","St. George's Chapel","Duchess of Cambridge",
+            "Prince George","Princess Charlotte","St. George's Hall","Bishop Michael Curry","Doria Ragland","Prince of Wales","Nottingham Cottage","American",
+            "Suits","Princess of Wales","fireworks","cocktail ring","Princess Diana","The Royal Navy","British Army","Royal Air Force","parade","Captain Wales","fashion","modern","diversity","Prince William","Kensington Palace","Nott Cott","Prince Charles",
+            "George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"] },
+    { "name": "Celebrity Attendees",
+      "wordlist": ["George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"] },
+    { "name": "Locations",
+      "wordlist": ["United Kingdom","Windsor Castle","St. George Cathedral","Frogmore House","St. George's Chapel","St. George's Hall","Nottingham Cottage" ,
+            "Kensington Palace","Nott Cott"] },
+    { "name": "Royalty",
+      "wordlist": ["Prince Harry","Queen Elizabeth II","Prince George","Princess Charlotte","Princess Diana","Prince William","Prince Charles"] }
+];
+
 // let's play a game
 var myGame = {
     // properties
-    selectedCategory: '',
+    selectedCategory: {},
     wordBank: '',
     wordToGuess: '',
     guessesRemaining: 0,
@@ -45,13 +65,23 @@ var myGame = {
     // methods
     ////////////////////
     start: function () {
-        // this.selectedCategory = RoyalWeddingCategories[Math.floor(Math.random() * RoyalWeddingCategories.length)];      // randomly select a category
-        // this.wordBank = RoyalWeddingCategories[this.selectedCategory];   
-        this.wordBank = RoyalWeddingCategories;
+        this.selectedCategory = RoyalWeddingCategories[Math.floor(Math.random() * RoyalWeddingCategories.length)];      // randomly select a category
+        this.wordBank = this.selectedCategory.wordlist;   
         this.wordToGuess = this.wordBank[Math.floor(Math.random() * this.wordBank.length)].toUpperCase();               // randomly choose a word from the word bank
         this.guessesRemaining = MAXGUESSES;
 
+        this.guessedLetters = [];
+        this.numLettersMatched = 0;
+        this.gameIsOver = false;
+
         console.log(this.wordToGuess);
+
+        //**********************************************************************TODO somewhere need to count the spaces in the word and the special characters******************
+        // if (/[.']/.test(word[j]) || (position >= 0 && word[j] === " ")) { myGame.numLettersMatched++; };
+        // var reg = new RegExp(/[.']/, 'g');
+        // var count = (this.wordToGuess.match(reg) || []).length;       // get number of letters in word
+
+
         return this.wordToGuess;
     },
 
@@ -63,12 +93,22 @@ var myGame = {
     // main actions
     guessLetter: function(letter) {
         var foundLetter = (this.wordToGuess.indexOf(letter) === -1) ? false : true;
-        var count = (this.wordToGuess.match(/letter/g) || []).length;       // get number of letters in word
+        if (foundLetter) {
+            var re = new RegExp(letter, 'g');
+            var count = (this.wordToGuess.match(re) || []).length;       // get number of letters in word
+        }
         
-        this.numLettersMatched = this.numLettersMatched + count;
-        console.log("Counts of this letter: " + count);
-        console.log("Number of letters matched: " + this.numLettersMatched);
-        this.guessedLetters.push(letter);
+        if (foundLetter) {
+            this.numLettersMatched += count;
+            console.log("Counts of this letter: " + count);
+            console.log("Number of letters matched: " + this.numLettersMatched);
+            console.log("Number of letters in word: " + this.wordToGuess.length);
+        } else {
+            // if the guessed letter has not been entered before, add it to the guesses.  Otherwise, ignore and do not decrease guesses
+            if (this.guessedLetters.indexOf(letter) === -1) {
+                this.guessedLetters.push(letter);
+            }
+        }
 
         return foundLetter;
     }
@@ -88,13 +128,14 @@ function drawLetter (char, position, isShown) {
     var isCharAndShown = (isShown === true && !isWordSeparator);
     var isCharAndHidden = (isShown === false && !isWordSeparator);
     var isWhitespace = (position < 0);
+    var isSpecialChar = (/[.']/.test(char));
 
     var spanElement = document.createElement("span");  
     var textElement;
     
     if (isWordSeparator) { 
         textElement = document.createTextNode(String.fromCharCode(160));
-    } else if (isCharAndShown) {
+    } else if (isCharAndShown || isSpecialChar) {
         textElement = document.createTextNode(char);
     } else if (isCharAndHidden) {
         textElement = document.createTextNode("_" + String.fromCharCode(160));
@@ -113,7 +154,7 @@ function drawLetter (char, position, isShown) {
         spanElement.setAttribute("id", position );
         spanElement.setAttribute("class", char);
 
-        if (isShown) {
+        if (isShown || isSpecialChar) {
             spanElement.setAttribute("style", "text-decoration: none;");
         } else {
             //if (getStylePropertyValue("word-to-guess", "font-family") == "\"Segoe UI\", sans-serif") {
@@ -126,7 +167,7 @@ function drawLetter (char, position, isShown) {
     spanElement.appendChild(textElement);  
     wordtoguessElem.appendChild(spanElement); 
 
-    console.log("html: " + wordtoguessElem.innerHTML);
+    //console.log("html: " + wordtoguessElem.innerHTML);
 };
 
 function showSolvedWord(word) {
@@ -201,10 +242,12 @@ document.onkeyup = function(event) {
                 spanElement.innerText = key;
             }
 
-            window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
         } else {                                    // letter not found
+
             myGame.guessesRemaining--;
             window.document.querySelector("#guesses-remaining").innerHTML = myGame.guessesRemaining;
+            window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
+
         }
 
     }
@@ -214,8 +257,7 @@ document.onkeyup = function(event) {
     ///////////////
     if (myGame.gameOver())
     {
-        totalGamesPlayed++;
-        window.document.querySelector("#total-games-played").innerHTML = totalGamesPlayed;
+        var newWord;
 
         if (myGame.isGameSolved()) {
             totalWins++;
@@ -225,7 +267,20 @@ document.onkeyup = function(event) {
             window.document.querySelector("#total-losses").innerHTML = totalLosses;
         }
 
-    //gameReset();              TODO: Clean up object and reset game
+        totalGamesPlayed++;
+        window.document.querySelector("#total-games-played").innerHTML = totalGamesPlayed;
+
+        /////////////////////
+        // Reset Game
+        var node = document.getElementById("word-to-guess");
+        node.innerHTML = '';
+        myGame.length = 0;
+
+        newWord = myGame.start();
+        showStartWord(newWord);
+
+        window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
+        window.document.querySelector("#guesses-remaining").innerHTML = myGame.guessesRemaining;
     }
 
 };
