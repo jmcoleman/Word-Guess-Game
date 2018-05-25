@@ -10,29 +10,8 @@ var totalGamesPlayed = 0;
 //*******************/
 //***  OBJECTS    ***/
 //*******************/
-// var RoyalWeddingCategories = ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
-//             "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
-//             "frockcoat","Veil","page boys","tiara","Duke of Cambridge","best man","Archbishop of Canterbury","St. George's Chapel","Duchess of Cambridge",
-//             "Prince George","Princess Charlotte","St. George's Hall","Bishop Michael Curry","Doria Ragland","Prince of Wales","Nottingham Cottage","American",
-//             "Suits","Princess of Wales","fireworks","cocktail ring","Princess Diana","The Royal Navy","British Army","Royal Air Force","parade","Captain Wales","fashion","modern",
-//             "diversity","Prince William","Kensington Palace","Nott Cott","Prince Charles",
-//             "George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"];
 
-//this is an object of properties with properties assigned to arrays.
-// var RoyalWeddingCategories = {
-//     "All": ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
-//             "Carriage","black-tie","Frogmore House","Jaguar","Queen Elizabeth II","Celebreties","Ascot Landau","Commonwealth","Blues and Royals",
-//             "frockcoat","Veil","page boys","tiara","Duke of Cambridge","best man","Archbishop of Canterbury","St. George's Chapel","Duchess of Cambridge",
-//             "Prince George","Princess Charlotte","St. George's Hall","Bishop Michael Curry","Doria Ragland","Prince of Wales","Nottingham Cottage","American",
-//             "Suits","Princess of Wales","fireworks","cocktail ring","Princess Diana","The Royal Navy","British Army","Royal Air Force","parade","Captain Wales","fashion","modern","diversity","Prince William","Kensington Palace","Nott Cott","Prince Charles",
-//             "George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"],
-//     "Celebrity Attendees": ["George Clooney","Amal Clooney", "Serena Williams","David Beckham","Oprah Winfrey","Sir Elton John"],
-//     "Locations": ["United Kingdom","Windsor Castle","St. George Cathedral","Frogmore House","St. George's Chapel","St. George's Hall","Nottingham Cottage",
-//             "Kensington Palace","Nott Cott"],
-//     "Royalty": ["Prince Harry","Queen Elizabeth II","Prince George","Princess Charlotte","Princess Diana","Prince William","Prince Charles"]
-// };
-
-// want an array of objects
+// array of objects (category objects with name and wordlist)
 var RoyalWeddingCategories = [
     { "name": "All",
       "wordlist": ["United Kingdom","Windsor Castle","Duke of Sussex","Prince Harry","St. George Cathedral","Meghan Markle","Duchess of Sussex",
@@ -64,10 +43,10 @@ var myGame = {
     ////////////////////
     // methods
     ////////////////////
-    start: function () {
-        this.selectedCategory = RoyalWeddingCategories[Math.floor(Math.random() * RoyalWeddingCategories.length)];      // randomly select a category
+    start: function (categories) {
+        this.selectedCategory = categories[Math.floor(Math.random() * categories.length)];                          // randomly select a category
         this.wordBank = this.selectedCategory.wordlist;   
-        this.wordToGuess = this.wordBank[Math.floor(Math.random() * this.wordBank.length)].toUpperCase();               // randomly choose a word from the word bank
+        this.wordToGuess = this.wordBank[Math.floor(Math.random() * this.wordBank.length)].toUpperCase();           // randomly choose a word from the word bank
         this.guessesRemaining = MAXGUESSES;
 
         this.guessedLetters = [];
@@ -76,6 +55,12 @@ var myGame = {
 
         console.log(this.wordToGuess);
 
+        // add special characters and word breaks to the number of letters matched
+        var nonLetterChars = 0;
+
+
+        this.numLettersMatched += nonLetterChars;
+        
         //**********************************************************************TODO somewhere need to count the spaces in the word and the special characters******************
         // if (/[.']/.test(word[j]) || (position >= 0 && word[j] === " ")) { myGame.numLettersMatched++; };
         // var reg = new RegExp(/[.']/, 'g');
@@ -206,7 +191,7 @@ window.onload = function() {
         console.log(getStylePropertyValue(node, "font-family"));
         node.innerHTML = '';
 
-        var word = myGame.start();
+        var word = myGame.start(RoyalWeddingCategories);
 
         showStartWord(word);
         //showSolvedWord(word);
@@ -276,7 +261,7 @@ document.onkeyup = function(event) {
         node.innerHTML = '';
         myGame.length = 0;
 
-        newWord = myGame.start();
+        newWord = myGame.start(RoyalWeddingCategories);
         showStartWord(newWord);
 
         window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
