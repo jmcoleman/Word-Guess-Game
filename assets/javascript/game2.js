@@ -102,7 +102,8 @@ var myGame = {
         }
 
         return foundLetter;
-    }
+    },
+
 };
 
 //*******************/
@@ -201,6 +202,9 @@ window.onload = function() {
         showStartWord(word);
         document.onkeyup = playGame;
         //showSolvedWord(word);
+
+        startFireworks();
+        loop();
 }
 
 function playGame (event) {
@@ -297,3 +301,25 @@ function playGame (event) {
 
 };
 
+////////////////////////////////////////////
+// Experiment with creating fireworks
+////////////////////////////////////////////
+var bgFirework;
+
+function startFireworks () {
+    var canvasTest = document.getElementById("overlay");
+
+    //jc add to show the canvas
+    canvasTest.setAttribute("style", "display: block; z-index: -1; opacity: .5;");
+
+    var ctx = canvasTest.getContext("2d");
+  
+    //testing background display            TODO remove next 4 lines of testing
+    ctx.fillStyle = "rgb(200,0,0)";
+    ctx.fillRect (10, 10, 55, 50);
+  
+    ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+    ctx.fillRect (30, 30, 55, 50);
+
+    bgFirework = "url(" + canvasTest.toDataURL() + ")";
+};
