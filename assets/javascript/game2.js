@@ -50,22 +50,21 @@ var myGame = {
         this.guessesRemaining = MAXGUESSES;
 
         this.guessedLetters = [];
+        this.foundLetters = [];
         this.numLettersMatched = 0;
         this.gameIsOver = false;
 
         console.log(this.wordToGuess);
 
-        // add special characters and word breaks to the number of letters matched
-        var nonLetterChars = 0;
-
-
-        this.numLettersMatched += nonLetterChars;
+        // count the number of special characters as total letters matched
+        const nonLetterChars = (str) => {
+            const re = /[.']/g
+            return ((str || '').match(re) || []).length
+        }
+        this.numLettersMatched += nonLetterChars(this.wordToGuess);
         
-        //**********************************************************************TODO somewhere need to count the spaces in the word and the special characters******************
-        // if (/[.']/.test(word[j]) || (position >= 0 && word[j] === " ")) { myGame.numLettersMatched++; };
-        // var reg = new RegExp(/[.']/, 'g');
-        // var count = (this.wordToGuess.match(reg) || []).length;       // get number of letters in word
-
+        // count the number of spaces and add to total letters matched
+        this.numLettersMatched += this.wordToGuess.split(" ").length-1;
 
         return this.wordToGuess;
     },
@@ -77,20 +76,27 @@ var myGame = {
 
     // main actions
     guessLetter: function(letter) {
+        console.log("Total letters matched so far: " + this.numLettersMatched);
+
+        // if letter was found previously, don't add it again, just return
+
         var foundLetter = (this.wordToGuess.indexOf(letter) === -1) ? false : true;
+        
         if (foundLetter) {
             var re = new RegExp(letter, 'g');
             var count = (this.wordToGuess.match(re) || []).length;       // get number of letters in word
         }
-        
-        if (foundLetter) {
-            this.numLettersMatched += count;
-            console.log("Counts of this letter: " + count);
-            console.log("Number of letters matched: " + this.numLettersMatched);
-            console.log("Number of letters in word: " + this.wordToGuess.length);
-        } else {
-            // if the guessed letter has not been entered before, add it to the guesses.  Otherwise, ignore and do not decrease guesses
-            if (this.guessedLetters.indexOf(letter) === -1) {
+
+        // if the guessed letter has not been entered before, handle it.  Otherwise, ignore and do not update anything
+        if (this.guessedLetters.indexOf(letter) === -1) {
+            // if found letter and this letter is not previously found
+            if (foundLetter && this.foundLetters.indexOf(letter) === -1) {
+                this.numLettersMatched += count;
+                console.log("Counts of this letter: " + count);
+                console.log("Number of letters matched: " + this.numLettersMatched);
+                console.log("Number of letters in word: " + this.wordToGuess.length);
+                this.foundLetters.push(letter);
+            } else if (!foundLetter) {
                 this.guessedLetters.push(letter);
             }
         }
