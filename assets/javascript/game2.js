@@ -117,9 +117,9 @@ function drawLetter (char, position, isShown) {
 
     var wordtoguessElem = document.getElementById("word-to-guess");
     var isWordSeparator = (position >= 0 && char === " ");
-    var isCharAndShown = (isShown === true && !isWordSeparator);
-    var isCharAndHidden = (isShown === false && !isWordSeparator);
-    var isWhitespace = (position < 0);
+    var isWhitespace = (position < 0 && char === " ");
+    var isCharAndShown = (isShown === true && !isWordSeparator && !isWhitespace);
+    var isCharAndHidden = (isShown === false && !isWordSeparator && !isWhitespace);
     var isSpecialChar = (/[.']/.test(char));
 
     var spanElement = document.createElement("span");  
@@ -132,7 +132,7 @@ function drawLetter (char, position, isShown) {
     } else if (isCharAndHidden) {
         textElement = document.createTextNode("_" + String.fromCharCode(160));
     } else if (isWhitespace) {
-        textElement = document.createTextNode('');
+        textElement = document.createTextNode(String.fromCharCode(160));
     };
 
     if (char === " ") {
@@ -159,7 +159,7 @@ function drawLetter (char, position, isShown) {
     spanElement.appendChild(textElement);  
     wordtoguessElem.appendChild(spanElement); 
 
-    //console.log("html: " + wordtoguessElem.innerHTML);
+    console.log("html: " + wordtoguessElem.innerHTML);
 };
 
 function showSolvedWord(word) {
@@ -310,7 +310,7 @@ function startFireworks () {
     var canvasTest = document.getElementById("overlay");
 
     //jc add to show the canvas
-    canvasTest.setAttribute("style", "display: block; z-index: -1; opacity: .5;");
+    canvasTest.setAttribute("style", "display: block; opacity: .5;");
 
     var ctx = canvasTest.getContext("2d");
   
