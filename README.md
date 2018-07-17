@@ -3,9 +3,9 @@ Word Guess Game
 
 Test your British Royal Wedding prowess with this browser based word guess game.  You will have 5 tries to come up with all the letters for a randomly selected word related to the Royal Wedding of Prince Harry and Meghan Markle.
 
-**Description of problem:** Provide a fun way to test your knowledge of the Royal wedding of Prince Harry and Meghan Markle.
-**How solved:** A word guess game that uses a list of words that describe the event.
-**Technical approach:** You will guess a randomly selected word from the 50+ words related to the event from the word bank.  All of this while enjoying a picturesque image of the carriage ride and fireworks animations.
+**Description of problem:** Provide a fun way to test your knowledge of the Royal wedding of Prince Harry and Meghan Markle.\
+**How solved:** A word guess game that uses a list of words that describe the event.\
+**Technical approach:** You will guess a randomly selected word from the 50+ words related to the event from the word bank.  All of this while enjoying a picturesque image of the carriage ride and fireworks animations.\
 
 ## Getting Started
 
