@@ -211,7 +211,6 @@ function playGame (event) {
     var key = event.key;
     key = key.toUpperCase();
 
-
     console.log("Key pressed is: " + key);
     console.log(key);
 
@@ -258,6 +257,12 @@ function playGame (event) {
 
         document.onkeyup = null;
 
+        // hide the stats
+        var x = document.getElementById("guess-stats");
+        x.setAttribute("hidden", true);
+        var y = document.getElementById("game-stats");
+        y.setAttribute("hidden", true);
+
         if (myGame.isGameSolved()) {
             feedbk.innerHTML = "You Win!";
             //feedbk.setAttribute("style","font-size: 3rem");
@@ -265,7 +270,7 @@ function playGame (event) {
             totalWins++;
             window.document.querySelector("#total-wins").innerHTML = totalWins;
         } else {
-            feedbk.innerHTML = "Awwww... Try Again!";
+            feedbk.innerHTML = "Awwww... Try Again!<br>The answer was " + myGame.wordToGuess;
             //feedbk.setAttribute("style","font-size: 3rem");
             
             totalLosses++;
@@ -279,6 +284,12 @@ function playGame (event) {
         setTimeout(function() {
             // Change the text here
             feedbk.innerHTML = "Press any key to get started!";
+
+            // show stats again
+            var x = document.getElementById("guess-stats");
+            x.removeAttribute("hidden");
+            var y = document.getElementById("game-stats");
+            y.removeAttribute("hidden");
 
             /////////////////////
             // Reset Game
@@ -296,7 +307,7 @@ function playGame (event) {
             window.document.querySelector("#guessed-letters").innerHTML = myGame.guessedLetters.join(', ');
             window.document.querySelector("#guesses-remaining").innerHTML = myGame.guessesRemaining;
 
-        }, 5000);
+        }, 3000);
     }
 
 };
