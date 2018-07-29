@@ -123,6 +123,10 @@ footer {
     html {
         font-size: .7rem;
     }
+
+    h1.display-4 {
+        font-size: .4rem;
+    }
 }
 
  /* Small devices (landscape phones, 576px and up) */
