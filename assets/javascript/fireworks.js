@@ -36,10 +36,10 @@ var canvas = document.getElementById( 'overlay' ),
 		my;
 		
 // set canvas dimensions
-canvas.width = cw;
-canvas.height = ch;
-// canvas.width = 100%;
-// canvas.height = 100%;
+// canvas.width = cw;
+// canvas.height = ch;
+canvas.width = 100%;
+canvas.height = 100%;
 
 // now we are going to setup our function placeholders for the entire demo
 
