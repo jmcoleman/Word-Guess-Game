@@ -36,10 +36,10 @@ var canvas = document.getElementById( 'overlay' ),
 		my;
 		
 // set canvas dimensions
-// canvas.width = cw;
-// canvas.height = ch;
-canvas.width = 100%;
-canvas.height = 100%;
+canvas.width = cw;
+canvas.height = ch;
+// canvas.width = 100%;
+// canvas.height = 100%;
 
 // now we are going to setup our function placeholders for the entire demo
 
@@ -51,7 +51,7 @@ function random( min, max ) {
 // calculate the distance between two points
 function calculateDistance( p1x, p1y, p2x, p2y ) {
 	var xDistance = p1x - p2x,
-			yDistance = p1y - p2y;
+		yDistance = p1y - p2y;
 	return Math.sqrt( Math.pow( xDistance, 2 ) + Math.pow( yDistance, 2 ) );
 }
 
@@ -81,7 +81,7 @@ function Firework( sx, sy, tx, ty ) {
 	this.acceleration = 1.05;
 	this.brightness = random( 50, 70 );
 	// circle target indicator radius
-	this.targetRadius = 1;
+	this.targetRadius = 1;				//jmc, set to 1 to see target radius
 }
 
 // update firework
