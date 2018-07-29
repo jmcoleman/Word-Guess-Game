@@ -9,29 +9,26 @@
 }
 */
 
+body, html {
+    /* height: 100%;
+    width: 100%;
+    min-width: 6em; */
+}
+
 body {
     color: #fff;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin: auto auto 0 auto;
 }
 
 .background-container {
-    /*====================================
-        Background image options
-    ======================================*/
-    /*background: url("https://www.telegraph.co.uk/content/dam/news/2018/05/21/TELEMMGLPICT000164247803_1_trans_NvBQzQNjv4BqmZdl6WAfafP5Agw6VsmMU9SSJoEIbVhrQCF3hPbmehY.jpeg?imwidth=1400");   First official royal wedding pictures of Prince Harry and Meghan Markle released CREDIT: ALEXI LUBOMIRSKI/KENSINGTON PALACE */
-    /*
-    background: url("https://www.telegraph.co.uk/content/dam/news/2018/05/19/TELEMMGLPICT000164009700_1_trans_NvBQzQNjv4BqnovVTiJx1-CJOCPnC8SeZ7bZz3uglRwWamDyUxsJkNc.jpeg?imwidth=1240");   Best option -- bride up the stairs better positioned
-    background-size: cover; */
-    /*background: url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b00891f352f534e97f901fd/1526761762102/weddingblog104.jpg");  Source: Associated Press -- bride up the stairs*/
-    /* background: url("https://www.telegraph.co.uk/content/dam/news/2018/05/19/TELEMMGLPICT000164030139_1_trans_NvBQzQNjv4BqlLhtdm8KsfQY7X1dNV4ThQQJQIrQlKkMZMOvThOlicg.jpeg?imwidth=1400"); LIKE but doesn't fit entire background -- bride spotlight */
-    /* Use This if contain */
-    /*background: url("http://www4.pictures.livingly.com/gi/Prince+Harry+Marries+Ms+Meghan+Markle+Windsor+rhsxJVnjT0El.jpg");  (May 18, 2018 - Source: WPA Pool/Getty Images Europe)  */
-
-    /* Option 1 */
-    /*background: url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b0089228a922d8cabed2986/1526761765237/weddingblog115.jpg?format=1500w");  Source: Associated Press */
-
-    /* Option 2 */ 
-    /* background: url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b008923562fa7b754bbe076/1526761769173/weddingblog120.jpg?format=1500w");   Source: Associated Press */
-
+    /* Background image */
     background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b0089228a922d8cabed2986/1526761765237/weddingblog115.jpg?format=1500w");
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("https://static1.squarespace.com/static/57cf18ae6b8f5ba693497e1a/5b00891e03ce6487dbd1eba6/5b0089228a922d8cabed2986/1526761765237/weddingblog115.jpg?format=1500w");
 
@@ -41,11 +38,11 @@ body {
     background-size: cover;
     
     background-color: rgb(78, 78, 78);
+    width: 100%;
+    height: 100%;
 }
 
 .regal-font {
-/*    font-family: 'Lobster Two', cursive; 
-    font-family: 'PT Sans', sans-serif;*/
     font-family: 'BLKCHCRY';
 }
 
@@ -98,8 +95,10 @@ body {
 #overlay {
     position: fixed;
     display: none;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
+    width: 100vh;
+    height: 100vh;
     top: 0;
     left: 0;
     right: 0;
