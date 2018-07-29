@@ -323,7 +323,7 @@ function startFireworks () {
     //jc add to show the canvas
     canvasTest.setAttribute("style", "display: block; opacity: .5;");
 
-    // var ctx = canvasTest.getContext("2d");
+    var ctx = canvasTest.getContext("2d");
   
     // //testing background display            TODO remove next 4 lines of testing
     // ctx.fillStyle = "rgb(200,0,0)";
